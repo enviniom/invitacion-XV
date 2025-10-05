@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+package-lock.json
+
+# Generated files
+urls-invitados.txt
+*.uuid.html
+mensajes-whatsapp.txt
+reporte-*.txt
+
+# System files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Images (uncomment if you don't want to track images)
+# images/*.jpg
+# images/*.jpeg
+# images/*.png
+# images/*.gif
+# images/*.webp
+
+# Backup files
+*.bak
+*.backup
+*~

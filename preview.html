@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview - Invitaciones XV Años</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+            text-align: center;
+        }
+        
+        .card-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .card-guests {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .guest-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .guest-item:last-child {
+            border-bottom: none;
+        }
+        
+        .guest-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .guest-count {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            margin-top: 0.5rem;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .instructions h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions ol {
+            margin-left: 1.5rem;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .instructions code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Invitaciones XV Años - Shivi</h1>
+            <p>Vista previa de invitaciones personalizadas</p>
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 Instrucciones Rápidas</h2>
+            <ol>
+                <li>Cada invitado tiene una URL única basada en su UUID</li>
+                <li>Haz clic en "Ver Invitación" para ver la versión personalizada</li>
+                <li>Para generar todas las páginas: <code>node generate.js</code></li>
+                <li>Para iniciar servidor local: <code>python3 -m http.server 8000</code></li>
+                <li>Lee el <code>README.md</code> para más información</li>
+            </ol>
+        </div>
+        
+        <div class="cards" id="cardsContainer">
+            <!-- Las tarjetas se generarán dinámicamente -->
+        </div>
+    </div>
+    
+    <script src="data.js"></script>
+    <script>
+        // Generar tarjetas de vista previa
+        const container = document.getElementById('cardsContainer');
+        
+        // Tarjeta para la página principal
+        const mainCard = document.createElement('div');
+        mainCard.className = 'card';
+        mainCard.innerHTML = `
+            <div class="card-icon">🏠</div>
+            <h3 class="card-title">Página Principal</h3>
+            <p class="card-desc">Vista general de la invitación sin personalizar</p>
+            <a href="index.html" class="btn" target="_blank">Ver Página</a>
+        `;
+        container.appendChild(mainCard);
+        
+        // Tarjetas para cada invitado
+        invitados.forEach(invitado => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            card.innerHTML = `
+                <div class="card-icon">💌</div>
+                <h3 class="card-title">${invitado.nombre}</h3>
+                <p class="card-desc">Invitación personalizada</p>
+                <div class="card-guests">
+                    <div class="guest-item">
+                        <span class="guest-name">Invitado:</span>
+                        <span>${invitado.nombre}</span>
+                    </div>
+                    <div class="guest-item">
+                        <span class="guest-name">Personas:</span>
+                        <span class="guest-count">${invitado.cantidadInvitados}</span>
+                    </div>
+                    <div class="guest-item">
+                        <span class="guest-name">UUID:</span>
+                        <span style="font-size: 0.8rem; word-break: break-all;">${invitado.uuid}</span>
+                    </div>
+                </div>
+                <a href="${invitado.uuid}.html" class="btn" target="_blank">Ver Invitación</a>
+                <button class="btn btn-secondary" onclick="copyURL('${invitado.uuid}')">📋 Copiar URL</button>
+            `;
+            
+            container.appendChild(card);
+        });
+        
+        // Función para copiar URL
+        function copyURL(uuid) {
+            const url = `${window.location.origin}/${uuid}.html`;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('✅ URL copiada al portapapeles:\n' + url);
+            }).catch(err => {
+                prompt('Copia esta URL:', url);
+            });
+        }
+        
+        // Información en consola
+        console.log('%c🎉 Sistema de Invitaciones XV Años', 'font-size: 20px; font-weight: bold; color: #667eea;');
+        console.log('%cTotal de invitados:', 'font-weight: bold;', invitados.length);
+        console.log('%cEvento:', 'font-weight: bold;', eventData.evento.fecha);
+        console.log('%cLugar:', 'font-weight: bold;', eventData.evento.lugar);
+    </script>
+</body>
+</html>

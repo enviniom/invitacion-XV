@@ -1,0 +1,20 @@
+{
+  "name": "invitacion-xv-shivi",
+  "version": "1.0.0",
+  "description": "Invitación interactiva para XV años con diseño inspirado en hadas y mariposas",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "generate": "node generate.js",
+    "serve": "npx http-server -p 8000 -o"
+  },
+  "keywords": [
+    "invitacion",
+    "xv-años",
+    "quinceañera",
+    "web",
+    "responsive"
+  ],
+  "author": "",
+  "license": "ISC"
+}
