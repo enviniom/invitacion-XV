@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeApp() {
+    // Inicializar audio de fondo
+    initializeBackgroundMusic();
+    
     // Obtener UUID de la URL
     const uuid = getUUIDFromURL();
     let invitado = null;
@@ -330,4 +333,94 @@ function initializeGallery() {
             nextSlide();
         }
     });
+}
+
+// Inicializar música de fondo
+function initializeBackgroundMusic() {
+    const audio = document.getElementById('backgroundMusic');
+    
+    if (audio) {
+        // Intentar reproducir automáticamente
+        const playAudio = () => {
+            audio.play().catch(error => {
+                console.log('Autoplay bloqueado por el navegador:', error);
+                // Crear un botón para permitir al usuario activar la música
+                createMusicToggleButton(audio);
+            });
+        };
+
+        // Intentar reproducir inmediatamente
+        playAudio();
+
+        // También intentar cuando el usuario interactúe por primera vez
+        const enableAudioOnInteraction = () => {
+            audio.play().catch(error => {
+                console.log('No se pudo reproducir el audio:', error);
+            });
+            // Remover el listener después del primer intento
+            document.removeEventListener('click', enableAudioOnInteraction);
+            document.removeEventListener('touchstart', enableAudioOnInteraction);
+        };
+
+        document.addEventListener('click', enableAudioOnInteraction);
+        document.addEventListener('touchstart', enableAudioOnInteraction);
+    }
+}
+
+// Crear botón para controlar la música
+function createMusicToggleButton(audio) {
+    // Verificar si ya existe el botón
+    if (document.getElementById('musicToggle')) return;
+
+    const musicButton = document.createElement('button');
+    musicButton.id = 'musicToggle';
+    musicButton.innerHTML = '🎵';
+    musicButton.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    `;
+
+    let isPlaying = false;
+
+    musicButton.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            musicButton.innerHTML = '🔇';
+            musicButton.style.opacity = '0.6';
+        } else {
+            audio.play().then(() => {
+                musicButton.innerHTML = '🎵';
+                musicButton.style.opacity = '1';
+            }).catch(error => {
+                console.log('Error al reproducir audio:', error);
+            });
+        }
+        isPlaying = !isPlaying;
+    });
+
+    // Listener para actualizar el estado del botón
+    audio.addEventListener('play', () => {
+        isPlaying = true;
+        musicButton.innerHTML = '🎵';
+        musicButton.style.opacity = '1';
+    });
+
+    audio.addEventListener('pause', () => {
+        isPlaying = false;
+        musicButton.innerHTML = '🔇';
+        musicButton.style.opacity = '0.6';
+    });
+
+    document.body.appendChild(musicButton);
 }

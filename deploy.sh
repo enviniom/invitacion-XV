@@ -23,7 +23,7 @@ if [ ! -f "index.html" ]; then
 fi
 
 echo -e "${BLUE}📝 Paso 1: Verificando archivos...${NC}"
-required_files=("index.html" "styles.css" "app.js" "data.js")
+required_files=("index.html" "css/styles.css" "js/app.js" "js/data.js")
 for file in "${required_files[@]}"; do
     if [ -f "$file" ]; then
         echo "   ✅ $file"
