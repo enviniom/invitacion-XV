@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,41 +11,41 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 2rem;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .header {
             text-align: center;
             color: white;
             margin-bottom: 3rem;
         }
-        
+
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
         }
-        
+
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .card {
             background: white;
             border-radius: 15px;
@@ -52,18 +53,18 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         .card-icon {
             font-size: 3rem;
             text-align: center;
             margin-bottom: 1rem;
         }
-        
+
         .card-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -71,14 +72,14 @@
             color: #333;
             text-align: center;
         }
-        
+
         .card-desc {
             color: #666;
             line-height: 1.6;
             margin-bottom: 1.5rem;
             text-align: center;
         }
-        
+
         .card-guests {
             background: #f8f9fa;
             padding: 1rem;
@@ -86,28 +87,28 @@
             margin-bottom: 1rem;
             font-size: 0.9rem;
         }
-        
+
         .guest-item {
             display: flex;
             justify-content: space-between;
             padding: 0.5rem 0;
             border-bottom: 1px solid #e0e0e0;
         }
-        
+
         .guest-item:last-child {
             border-bottom: none;
         }
-        
+
         .guest-name {
             font-weight: 600;
             color: #333;
         }
-        
+
         .guest-count {
             color: #667eea;
             font-weight: 600;
         }
-        
+
         .btn {
             display: block;
             width: 100%;
@@ -120,39 +121,45 @@
             font-weight: 600;
             transition: transform 0.2s ease;
         }
-        
+
         .btn:hover {
             transform: scale(1.05);
         }
-        
+
         .btn-secondary {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             margin-top: 0.5rem;
         }
-        
+
+        .top-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
         .instructions {
             background: white;
             border-radius: 15px;
             padding: 2rem;
-            margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .instructions h2 {
             color: #333;
             margin-bottom: 1rem;
         }
-        
+
         .instructions ol {
             margin-left: 1.5rem;
             color: #666;
             line-height: 1.8;
         }
-        
+
         .instructions li {
             margin-bottom: 0.5rem;
         }
-        
+
         .instructions code {
             background: #f8f9fa;
             padding: 0.2rem 0.5rem;
@@ -160,33 +167,48 @@
             font-family: 'Courier New', monospace;
             color: #667eea;
         }
-        
+
+        .main-page-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .main-page-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
         }
-        
-        .stats-card, .report-card {
+
+        .stats-card,
+        .report-card {
             background: white;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .stats-card h2, .report-card h2 {
+
+        .stats-card h2,
+        .report-card h2 {
             color: #667eea;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .stats-section {
             margin-bottom: 1.5rem;
         }
-        
+
         .stats-section h3 {
             color: #333;
             font-size: 1.1rem;
@@ -194,30 +216,30 @@
             border-bottom: 2px solid #667eea;
             padding-bottom: 0.5rem;
         }
-        
+
         .stats-item {
             display: flex;
             justify-content: space-between;
             padding: 0.5rem 0;
             color: #666;
         }
-        
+
         .stats-item .label {
             font-weight: 500;
         }
-        
+
         .stats-item .value {
             font-weight: 600;
             color: #667eea;
         }
-        
+
         .distribution-bar {
             display: flex;
             align-items: center;
             margin: 0.5rem 0;
             gap: 1rem;
         }
-        
+
         .bar {
             flex: 1;
             height: 25px;
@@ -230,48 +252,48 @@
             font-size: 0.85rem;
             font-weight: 600;
         }
-        
+
         .distribution-label {
             min-width: 80px;
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         .report-list {
-            max-height: 400px;
+            max-height: 500px;
             overflow-y: auto;
             border: 1px solid #e0e0e0;
             border-radius: 10px;
             padding: 1rem;
             background: #f8f9fa;
         }
-        
+
         .report-item {
             padding: 1rem;
             border-bottom: 1px solid #e0e0e0;
             margin-bottom: 1rem;
         }
-        
+
         .report-item:last-child {
             border-bottom: none;
             margin-bottom: 0;
         }
-        
+
         .report-item h4 {
             color: #667eea;
             margin-bottom: 0.5rem;
         }
-        
+
         .report-item .detail {
             color: #666;
             font-size: 0.9rem;
             margin: 0.3rem 0;
         }
-        
+
         .report-item .detail strong {
             color: #333;
         }
-        
+
         .countdown-timer {
             text-align: center;
             padding: 1.5rem;
@@ -280,31 +302,31 @@
             color: white;
             margin-top: 1rem;
         }
-        
+
         .countdown-timer h3 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .countdown-timer .days {
             font-size: 2rem;
             font-weight: bold;
         }
-        
+
         .card.no-uuid {
             opacity: 0.7;
             border: 2px solid #ff6b6b;
         }
-        
+
         .card.no-uuid .card-icon {
             filter: grayscale(100%);
         }
-        
+
         #headerStats {
             font-size: 1rem;
             margin-top: 1rem;
         }
-        
+
         #headerStats strong {
             color: #fff;
             font-weight: bold;
@@ -312,18 +334,27 @@
             padding: 0.2rem 0.5rem;
             border-radius: 5px;
         }
-        
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
             }
-            
+
             .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .top-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -331,126 +362,82 @@
             <p id="headerStats">Vista previa de invitaciones personalizadas</p>
         </div>
         
-        <div class="instructions">
-            <h2>📋 Instrucciones Rápidas</h2>
-            <ol>
-                <li>Cada invitado tiene una URL única basada en su UUID</li>
-                <li>Haz clic en "Ver Invitación" para ver la versión personalizada</li>
-                <li>Para generar todas las páginas: <code>node generate.js</code></li>
-                <li>Para iniciar servidor local: <code>python3 -m http.server 8000</code></li>
-                <li>Lee el <code>README.md</code> para más información</li>
-            </ol>
+        <!-- Instrucciones y Página Principal -->
+        <div class="top-grid">
+            <div class="instructions">
+                <h2>📋 Instrucciones Rápidas</h2>
+                <ol>
+                    <li>Cada invitado tiene una URL única basada en su UUID</li>
+                    <li>Haz clic en "Ver Invitación" para ver la versión personalizada</li>
+                    <li>Para generar todas las páginas: <code>node generate.js</code></li>
+                    <li>Para iniciar servidor local: <code>python3 -m http.server 8000</code></li>
+                    <li>Lee el <code>README.md</code> para más información</li>
+                </ol>
+            </div>
+            
+            <div class="main-page-card">
+                <div class="card-icon">🏠</div>
+                <h3 class="card-title">Página Principal</h3>
+                <p class="card-desc">Vista general de la invitación sin personalizar</p>
+                <a href="index.html" class="btn" target="_blank">Ver Página</a>
+            </div>
         </div>
-        
+
         <!-- Estadísticas y Reporte -->
         <div class="stats-grid">
             <div class="stats-card" id="statsCard">
                 <h2>📊 Estadísticas del Evento</h2>
                 <!-- Se generará dinámicamente -->
             </div>
-            
+
             <div class="report-card" id="reportCard">
                 <h2>📝 Reporte de Invitados</h2>
                 <!-- Se generará dinámicamente -->
             </div>
         </div>
-        
-        <div class="cards" id="cardsContainer">
-            <!-- Las tarjetas se generarán dinámicamente -->
-        </div>
     </div>
-    
+
     <script src="js/data.js"></script>
     <script>
-        // Generar tarjetas de vista previa
-        const container = document.getElementById('cardsContainer');
-        
         // Actualizar estadísticas en el header
         const totalInvitados = invitados.length;
         const totalPersonas = invitados.reduce((sum, inv) => sum + inv.cantidadInvitados, 0);
         const invitadosConUUID = invitados.filter(inv => inv.uuid && inv.uuid.trim() !== '').length;
-        
+
         document.getElementById('headerStats').innerHTML = `
             Total de Invitaciones: <strong>${totalInvitados}</strong> | 
             Total de Personas: <strong>${totalPersonas}</strong> | 
             Con UUID: <strong>${invitadosConUUID}/${totalInvitados}</strong>
         `;
-        
+
         // Generar estadísticas
         generateStatistics();
-        
+
         // Generar reporte
         generateReport();
-        
-        // Tarjeta para la página principal
-        const mainCard = document.createElement('div');
-        mainCard.className = 'card';
-        mainCard.innerHTML = `
-            <div class="card-icon">🏠</div>
-            <h3 class="card-title">Página Principal</h3>
-            <p class="card-desc">Vista general de la invitación sin personalizar</p>
-            <a href="index.html" class="btn" target="_blank">Ver Página</a>
-        `;
-        container.appendChild(mainCard);
-        
-        // Tarjetas para cada invitado
-        invitados.forEach((invitado, index) => {
-            const card = document.createElement('div');
-            
-            // Verificar si el UUID existe y no está vacío
-            const hasValidUUID = invitado.uuid && invitado.uuid.trim() !== '';
-            card.className = hasValidUUID ? 'card' : 'card no-uuid';
-            const invitationURL = hasValidUUID ? `${invitado.uuid}.html` : '#';
-            
-            card.innerHTML = `
-                <div class="card-icon">💌</div>
-                <h3 class="card-title">${invitado.nombre}</h3>
-                <p class="card-desc">Invitación personalizada #${index + 1}</p>
-                <div class="card-guests">
-                    <div class="guest-item">
-                        <span class="guest-name">Invitado:</span>
-                        <span>${invitado.nombre}</span>
-                    </div>
-                    <div class="guest-item">
-                        <span class="guest-name">Personas:</span>
-                        <span class="guest-count">${invitado.cantidadInvitados} persona${invitado.cantidadInvitados > 1 ? 's' : ''}</span>
-                    </div>
-                    <div class="guest-item">
-                        <span class="guest-name">UUID:</span>
-                        <span style="font-size: 0.75rem; word-break: break-all; color: ${hasValidUUID ? '#667eea' : '#ff0000'};">${hasValidUUID ? invitado.uuid : '⚠️ NO ASIGNADO'}</span>
-                    </div>
-                </div>
-                ${hasValidUUID ? 
-                    `<a href="${invitationURL}" class="btn" target="_blank" rel="noopener noreferrer">🔗 Ver Invitación</a>
-                    <button class="btn btn-secondary" onclick="copyURL('${invitado.uuid}', '${invitado.nombre}')">📋 Copiar URL</button>` :
-                    `<button class="btn" style="background: #ccc; cursor: not-allowed;" disabled>⚠️ UUID Faltante</button>`
-                }
-            `;
-            
-            container.appendChild(card);
-        });
-        
+
+
         // Función para generar estadísticas
         function generateStatistics() {
             const statsCard = document.getElementById('statsCard');
-            
+
             // Calcular estadísticas
             const totalInvitados = invitados.length;
             const totalPersonas = invitados.reduce((sum, inv) => sum + inv.cantidadInvitados, 0);
             const promedioPersonas = (totalPersonas / totalInvitados).toFixed(1);
-            
+
             // Distribución por cantidad de personas
             const distribucion = {};
             invitados.forEach(inv => {
                 const cant = inv.cantidadInvitados;
                 distribucion[cant] = (distribucion[cant] || 0) + 1;
             });
-            
+
             // Calcular días restantes
             const eventDate = new Date(eventData.evento.fecha);
             const today = new Date();
             const daysRemaining = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
-            
+
             let countdownHTML = '';
             if (daysRemaining > 0) {
                 countdownHTML = `
@@ -473,7 +460,7 @@
                     </div>
                 `;
             }
-            
+
             // Generar HTML de distribución
             let distributionHTML = '';
             Object.keys(distribucion).sort((a, b) => a - b).forEach(cant => {
@@ -488,7 +475,7 @@
                     </div>
                 `;
             });
-            
+
             statsCard.innerHTML += `
                 <div class="stats-section">
                     <h3>🎊 Información del Evento</h3>
@@ -498,9 +485,9 @@
                     </div>
                     <div class="stats-item">
                         <span class="label">📅 Fecha:</span>
-                        <span class="value">${eventDate.toLocaleDateString('es-ES', { 
-                            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
-                        })}</span>
+                        <span class="value">${eventDate.toLocaleDateString('es-ES', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            })}</span>
                     </div>
                     <div class="stats-item">
                         <span class="label">🏰 Lugar:</span>
@@ -532,13 +519,13 @@
                 ${countdownHTML}
             `;
         }
-        
+
         // Función para generar reporte
         function generateReport() {
             const reportCard = document.getElementById('reportCard');
-            
+
             let reportHTML = '<div class="report-list">';
-            
+
             invitados.forEach((inv, index) => {
                 const hasValidUUID = inv.uuid && inv.uuid.trim() !== '';
                 reportHTML += `
@@ -550,9 +537,9 @@
                     </div>
                 `;
             });
-            
+
             reportHTML += '</div>';
-            
+
             // Agregar resumen al final
             const totalPersonas = invitados.reduce((sum, inv) => sum + inv.cantidadInvitados, 0);
             reportHTML += `
@@ -567,22 +554,22 @@
                     </div>
                 </div>
             `;
-            
+
             reportCard.innerHTML += reportHTML;
         }
-        
+
         // Función para copiar URL
         function copyURL(uuid, nombre) {
             const baseURL = window.location.origin + window.location.pathname.replace('preview.html', '');
             const url = `${baseURL}${uuid}.html`;
-            
+
             navigator.clipboard.writeText(url).then(() => {
                 alert(`✅ URL copiada al portapapeles para:\n${nombre}\n\n${url}`);
             }).catch(err => {
                 prompt(`Copia esta URL para ${nombre}:`, url);
             });
         }
-        
+
         // Información en consola
         console.log('%c🎉 Sistema de Invitaciones XV Años', 'font-size: 20px; font-weight: bold; color: #667eea;');
         console.log('%cTotal de invitados:', 'font-weight: bold;', invitados.length);
@@ -590,4 +577,5 @@
         console.log('%cLugar:', 'font-weight: bold;', eventData.evento.lugar);
     </script>
 </body>
+
 </html>
