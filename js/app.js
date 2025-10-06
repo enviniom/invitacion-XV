@@ -139,7 +139,7 @@ function setupButtons(invitado) {
     // Botón de WhatsApp
     document.getElementById('confirmWhatsapp').addEventListener('click', function (e) {
         e.preventDefault();
-        const message = `${eventData.contacto.mensaje} - ${invitado.nombre} (${invitado.cantidadInvitados} persona${invitado.cantidadInvitados > 1 ? 's' : ''})`;
+        const message = `${eventData.contacto.mensaje} - ${invitado.nombre} - Confirmo (${invitado.cantidadInvitados} persona${invitado.cantidadInvitados > 1 ? 's' : ''})`;
         const whatsappUrl = `https://wa.me/${eventData.contacto.whatsapp}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     });
