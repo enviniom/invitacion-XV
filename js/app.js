@@ -75,11 +75,6 @@ function loadEventData(invitado) {
 
     document.getElementById('venueName').textContent = eventData.evento.lugar;
     document.getElementById('venueAddress').textContent = eventData.evento.direccion;
-
-    // Configurar mapa
-    const mapFrame = document.getElementById('mapFrame');
-    const { lat, lng } = eventData.evento.coordenadas;
-    mapFrame.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${lat},${lng}&zoom=15`;
 }
 
 function startCountdown() {
