@@ -161,6 +161,136 @@
             color: #667eea;
         }
         
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-card, .report-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stats-card h2, .report-card h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stats-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-section h3 {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: #666;
+        }
+        
+        .stats-item .label {
+            font-weight: 500;
+        }
+        
+        .stats-item .value {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .distribution-bar {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+            gap: 1rem;
+        }
+        
+        .bar {
+            flex: 1;
+            height: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .distribution-label {
+            min-width: 80px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .report-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+        
+        .report-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 1rem;
+        }
+        
+        .report-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .report-item h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .report-item .detail {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.3rem 0;
+        }
+        
+        .report-item .detail strong {
+            color: #333;
+        }
+        
+        .countdown-timer {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            color: white;
+            margin-top: 1rem;
+        }
+        
+        .countdown-timer h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .countdown-timer .days {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
         .card.no-uuid {
             opacity: 0.7;
             border: 2px solid #ff6b6b;
@@ -212,6 +342,19 @@
             </ol>
         </div>
         
+        <!-- Estadísticas y Reporte -->
+        <div class="stats-grid">
+            <div class="stats-card" id="statsCard">
+                <h2>📊 Estadísticas del Evento</h2>
+                <!-- Se generará dinámicamente -->
+            </div>
+            
+            <div class="report-card" id="reportCard">
+                <h2>📝 Reporte de Invitados</h2>
+                <!-- Se generará dinámicamente -->
+            </div>
+        </div>
+        
         <div class="cards" id="cardsContainer">
             <!-- Las tarjetas se generarán dinámicamente -->
         </div>
@@ -232,6 +375,12 @@
             Total de Personas: <strong>${totalPersonas}</strong> | 
             Con UUID: <strong>${invitadosConUUID}/${totalInvitados}</strong>
         `;
+        
+        // Generar estadísticas
+        generateStatistics();
+        
+        // Generar reporte
+        generateReport();
         
         // Tarjeta para la página principal
         const mainCard = document.createElement('div');
@@ -280,6 +429,147 @@
             
             container.appendChild(card);
         });
+        
+        // Función para generar estadísticas
+        function generateStatistics() {
+            const statsCard = document.getElementById('statsCard');
+            
+            // Calcular estadísticas
+            const totalInvitados = invitados.length;
+            const totalPersonas = invitados.reduce((sum, inv) => sum + inv.cantidadInvitados, 0);
+            const promedioPersonas = (totalPersonas / totalInvitados).toFixed(1);
+            
+            // Distribución por cantidad de personas
+            const distribucion = {};
+            invitados.forEach(inv => {
+                const cant = inv.cantidadInvitados;
+                distribucion[cant] = (distribucion[cant] || 0) + 1;
+            });
+            
+            // Calcular días restantes
+            const eventDate = new Date(eventData.evento.fecha);
+            const today = new Date();
+            const daysRemaining = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
+            
+            let countdownHTML = '';
+            if (daysRemaining > 0) {
+                countdownHTML = `
+                    <div class="countdown-timer">
+                        <h3>⏰ Tiempo Restante</h3>
+                        <div class="days">${daysRemaining} días</div>
+                        <div>para el evento</div>
+                    </div>
+                `;
+            } else if (daysRemaining === 0) {
+                countdownHTML = `
+                    <div class="countdown-timer">
+                        <h3>🎉 ¡El evento es HOY!</h3>
+                    </div>
+                `;
+            } else {
+                countdownHTML = `
+                    <div class="countdown-timer" style="background: #ccc;">
+                        <h3>📅 El evento fue hace ${Math.abs(daysRemaining)} días</h3>
+                    </div>
+                `;
+            }
+            
+            // Generar HTML de distribución
+            let distributionHTML = '';
+            Object.keys(distribucion).sort((a, b) => a - b).forEach(cant => {
+                const count = distribucion[cant];
+                const percentage = ((count / totalInvitados) * 100).toFixed(1);
+                distributionHTML += `
+                    <div class="distribution-bar">
+                        <div class="distribution-label">${cant} persona${cant > 1 ? 's' : ''}:</div>
+                        <div class="bar" style="width: ${percentage}%;">
+                            ${count} (${percentage}%)
+                        </div>
+                    </div>
+                `;
+            });
+            
+            statsCard.innerHTML += `
+                <div class="stats-section">
+                    <h3>🎊 Información del Evento</h3>
+                    <div class="stats-item">
+                        <span class="label">👑 Quinceañera:</span>
+                        <span class="value">${eventData.quinceañera.nombre}</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="label">📅 Fecha:</span>
+                        <span class="value">${eventDate.toLocaleDateString('es-ES', { 
+                            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+                        })}</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="label">🏰 Lugar:</span>
+                        <span class="value">${eventData.evento.lugar}</span>
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h3>👥 Invitados</h3>
+                    <div class="stats-item">
+                        <span class="label">Total de invitaciones:</span>
+                        <span class="value">${totalInvitados}</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="label">Total de personas:</span>
+                        <span class="value">${totalPersonas}</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="label">Promedio por invitación:</span>
+                        <span class="value">${promedioPersonas}</span>
+                    </div>
+                </div>
+                
+                <div class="stats-section">
+                    <h3>📈 Distribución</h3>
+                    ${distributionHTML}
+                </div>
+                
+                ${countdownHTML}
+            `;
+        }
+        
+        // Función para generar reporte
+        function generateReport() {
+            const reportCard = document.getElementById('reportCard');
+            
+            let reportHTML = '<div class="report-list">';
+            
+            invitados.forEach((inv, index) => {
+                const hasValidUUID = inv.uuid && inv.uuid.trim() !== '';
+                reportHTML += `
+                    <div class="report-item">
+                        <h4>${index + 1}. ${inv.nombre}</h4>
+                        <div class="detail"><strong>Personas:</strong> ${inv.cantidadInvitados}</div>
+                        <div class="detail"><strong>UUID:</strong> <span style="color: ${hasValidUUID ? '#667eea' : '#ff0000'}; font-size: 0.85rem; word-break: break-all;">${hasValidUUID ? inv.uuid : '⚠️ NO ASIGNADO'}</span></div>
+                        ${hasValidUUID ? `<div class="detail"><strong>URL:</strong> <a href="${inv.uuid}.html" target="_blank" style="color: #667eea; text-decoration: none;">Ver invitación →</a></div>` : ''}
+                    </div>
+                `;
+            });
+            
+            reportHTML += '</div>';
+            
+            // Agregar resumen al final
+            const totalPersonas = invitados.reduce((sum, inv) => sum + inv.cantidadInvitados, 0);
+            reportHTML += `
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #667eea;">
+                    <div class="stats-item">
+                        <span class="label">📊 Total invitaciones:</span>
+                        <span class="value">${invitados.length}</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="label">👨‍👩‍👧‍👦 Total personas:</span>
+                        <span class="value">${totalPersonas}</span>
+                    </div>
+                </div>
+            `;
+            
+            reportCard.innerHTML += reportHTML;
+        }
         
         // Función para copiar URL
         function copyURL(uuid, nombre) {
