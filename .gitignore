@@ -33,3 +33,9 @@ npm-debug.log*
 *.bak
 *.backup
 *~
+
+# Ignorar todos los archivos .html
+*.html
+
+# Pero NO ignorar index.html
+!index.html

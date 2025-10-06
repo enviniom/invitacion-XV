@@ -25,7 +25,7 @@ const colors = {
 let eventData, invitados;
 try {
     // Leer y procesar el archivo data.js
-    const dataContent = fs.readFileSync('./data.js', 'utf8');
+    const dataContent = fs.readFileSync('./js/data.js', 'utf8');
     
     // Extraer eventData
     const eventDataMatch = dataContent.match(/const eventData = ({[\s\S]*?});/);
@@ -155,7 +155,7 @@ function searchGuest(query) {
         console.log(`${colors.bright}Nombre:${colors.reset} ${inv.nombre}`);
         console.log(`${colors.bright}Personas:${colors.reset} ${inv.cantidadInvitados}`);
         console.log(`${colors.bright}UUID:${colors.reset} ${inv.uuid}`);
-        console.log(`${colors.bright}URL:${colors.reset} https://tudominio.com/${inv.uuid}.html`);
+        console.log(`${colors.bright}URL:${colors.reset} https://karla.playkru.com/${inv.uuid}.html`);
         console.log('─'.repeat(80));
     });
 }
@@ -181,7 +181,7 @@ function generateReport() {
         report += `${index + 1}. ${inv.nombre}\n`;
         report += `   Personas invitadas: ${inv.cantidadInvitados}\n`;
         report += `   UUID: ${inv.uuid}\n`;
-        report += `   URL: https://tudominio.com/${inv.uuid}.html\n\n`;
+        report += `   URL: https://karla.playkru.com/${inv.uuid}.html\n\n`;
     });
     
     report += '─'.repeat(80) + '\n';
@@ -204,7 +204,7 @@ function exportURLs() {
     
     invitados.forEach(inv => {
         content += `${inv.nombre} (${inv.cantidadInvitados} personas):\n`;
-        content += `https://tudominio.com/${inv.uuid}.html\n\n`;
+        content += `https://karla.playkru.com/${inv.uuid}.html\n\n`;
     });
     
     fs.writeFileSync(filename, content);
@@ -304,7 +304,7 @@ function generateQRInfo() {
     console.log(`Luego puedes usar esta lista de URLs:\n`);
     
     invitados.forEach(inv => {
-        console.log(`${inv.nombre}: https://tudominio.com/${inv.uuid}.html`);
+        console.log(`${inv.nombre}: https://karla.playkru.com/${inv.uuid}.html`);
     });
     
     console.log(`\n${colors.yellow}Puedes usar servicios online como:${colors.reset}`);
@@ -313,46 +313,12 @@ function generateQRInfo() {
     console.log();
 }
 
-// 8. Exportar para WhatsApp
+// 8. Exportar para WhatsApp (Ahora se genera automáticamente con generate.js)
 function exportWhatsApp() {
-    const filename = 'mensajes-whatsapp.txt';
-    let content = '';
-    
-    content += `MENSAJES PARA WHATSAPP - XV AÑOS ${eventData.quinceañera.nombre}\n`;
-    content += '═'.repeat(80) + '\n\n';
-    content += 'Copia y pega estos mensajes para enviar las invitaciones:\n\n';
-    content += '─'.repeat(80) + '\n\n';
-    
-    invitados.forEach(inv => {
-        const mensaje = `🎉 ¡Hola ${inv.nombre}!
-
-¡Tenemos el honor de invitarte a la celebración de los XV años de ${eventData.quinceañera.nombre}! 🦋✨
-
-📅 Fecha: ${new Date(eventData.evento.fecha).toLocaleDateString('es-ES', { 
-            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
-        })}
-⏰ Hora: ${new Date(eventData.evento.fecha).toLocaleTimeString('es-ES', { 
-            hour: '2-digit', minute: '2-digit' 
-        })}
-📍 Lugar: ${eventData.evento.lugar}
-
-👥 Invitación para ${inv.cantidadInvitados} persona${inv.cantidadInvitados > 1 ? 's' : ''}
-
-🔗 Tu invitación personalizada:
-https://tudominio.com/${inv.uuid}.html
-
-¡Esperamos contar con tu presencia! 💕
-
-Por favor confirma tu asistencia. ¡Gracias! 🙏`;
-        
-        content += `══════ ${inv.nombre} ══════\n\n`;
-        content += mensaje + '\n\n';
-        content += '─'.repeat(80) + '\n\n';
-    });
-    
-    fs.writeFileSync(filename, content);
-    console.log(`\n${colors.green}✅ Mensajes exportados a: ${filename}${colors.reset}`);
-    console.log(`${colors.yellow}Tip: Copia cada mensaje y envíalo por WhatsApp${colors.reset}\n`);
+    console.log(`\n${colors.cyan}📱 Generando mensajes de WhatsApp...${colors.reset}\n`);
+    console.log(`${colors.yellow}Nota: Los mensajes de WhatsApp ahora se generan automáticamente`);
+    console.log(`al ejecutar 'node generate.js'${colors.reset}\n`);
+    console.log(`${colors.green}Busca el archivo: mensajes-whatsapp.txt${colors.reset}\n`);
 }
 
 // Ejecutar según argumento
